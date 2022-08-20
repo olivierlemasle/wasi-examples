@@ -1,0 +1,13 @@
+{
+    "entries": [
+        "./hello-world-as.ts"
+    ],
+    "targets": {
+        "release": {
+            "outFile": "build/hello-world-as.wasm",
+            "textFile": "build/hello-world-as.wat",
+            "optimize": true
+        }
+    },
+    "options": {}
+}
