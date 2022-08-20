@@ -1,3 +1,5 @@
+wasmtime := "$HOME/.wasmtime/bin/wasmtime"
+
 build: build-all-assemblyscript build-all-rust
 
 run: run-all-assemblyscript run-all-rust
@@ -30,12 +32,12 @@ build-rust project:
 
 run-assemblyscript project:
   @echo "Run assemblyscript/{{project}}"
-  wasmtime "assemblyscript/{{project}}/build/{{project}}.wasm"
+  {{wasmtime}} "assemblyscript/{{project}}/build/{{project}}.wasm"
   @echo ""
 
 run-rust project:
   @echo "Run rust/{{project}}"
-  wasmtime "rust/{{project}}/target/wasm32-wasi/release/{{project}}.wasm"
+  {{wasmtime}} "rust/{{project}}/target/wasm32-wasi/release/{{project}}.wasm"
   @echo ""
 
 # Copy all WASI-enabled Wasm binaries to a directory "dist"
@@ -54,4 +56,4 @@ clean:
 setup:
   #!/bin/bash
   cargo wasi --help &>/dev/null || cargo install -f cargo-wasi
-  wasmtime -V &>/dev/null || curl https://wasmtime.dev/install.sh -sSf | bash
+  {{wasmtime}} -V &>/dev/null || curl https://wasmtime.dev/install.sh -sSf | bash
